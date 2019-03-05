@@ -2,7 +2,7 @@ Simple python-flask application with mysql connection.
 Has been made for testing purposes and does not bring any value.
 
 ```
-config.py contains information about connection to database
+config.py contains information about connection to database and application IP and port
 requirements.txt contains list of python modules to be installed
 tested on python 3.7.2
 ```
