@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ExTra</title>
+    <link href="{{ url_for('static', filename='css/tabulator_simple.min.css') }}" rel="stylesheet">
+</head>
+<body style="height: 100%">
+<script>
+    var db_data = JSON.parse('{{ data | tojson | safe }}')
+</script>
+<div>
+    <form method="post" action="/generate"><button>Generate new record</button></form>
+</div>
+<div id="data-table"></div>
+<script src="{{ url_for('static', filename='js/tabulator.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
