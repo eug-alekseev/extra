@@ -4,10 +4,15 @@ import config as c
 from mock import mock_data as mdata
 import random
 from db import db, Expense
+import os
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{c.mysql_user}:{c.mysql_pass}@{c.mysql_host}/{c.mysql_db}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://' \
+    f'{os.environ.get("EXTRAAPP_MYSQL_USER", c.mysql_user)}:' \
+    f'{os.environ.get("EXTRAAPP_MYSQL_PASS", c.mysql_pass)}@' \
+    f'{os.environ.get("EXTRAAPP_MYSQL_HOST", c.mysql_host)}/' \
+    f'{os.environ.get("EXTRAAPP_MYSQL_DB", c.mysql_db)}'
 app.config['SQLALCHEMY_POOL_RECYCLE'] = 28800
 app.config['SQLALCHEMY_POOL_SIZE'] = 20
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -38,4 +43,6 @@ def generate():
 
 
 if __name__ == "__main__":
-    app.run(host=c.app_ip, port=c.app_port, debug=c.app_debug_mode)
+    app.run(host=os.environ.get("EXTRAAPP_IP", c.app_ip),
+            port=os.environ.get("EXTRAAPP_PORT", c.app_port),
+            debug=os.environ.get("EXTRAAPP_DEBUG_MODE", c.app_debug_mode))
