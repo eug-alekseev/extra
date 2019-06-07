@@ -38,6 +38,7 @@ def generate():
                                comment=mdata[catid]['list'][expid]))
         db.session.commit()
     except Exception as e:
+        db.session.rollback()
         print(f'DB ERROR : {str(e)}', file=sys.stderr)
     return redirect('/')
 
